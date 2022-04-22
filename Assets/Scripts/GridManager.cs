@@ -2,39 +2,55 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
-public class GridManager : MonoBehaviour {
+
+public class GridManager : MonoBehaviour
+{
     [SerializeField] private int _width, _height;
- 
+
     [SerializeField] private Tile _tilePrefab;
- 
+
     [SerializeField] private Transform _cam;
- 
+
+    [SerializeField] private GameObject _gameBoard;
+
     private Dictionary<Vector2, Tile> _tiles;
- 
-    void Start() {
+
+    void Start()
+    {
         GenerateGrid();
     }
- 
-    void GenerateGrid() {
+
+    void GenerateGrid()
+    {
         _tiles = new Dictionary<Vector2, Tile>();
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
+
+        _gameBoard.transform.position = InitPosition((float)_width, (float)_height);
+
+        for (int x = 0; x < _width; x++)
+        {
+            for (int y = 0; y < _height; y++)
+            {
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
- 
-                var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                spawnedTile.Init(isOffset);
- 
- 
+
+                spawnedTile.Init();
+                spawnedTile.transform.SetParent(_gameBoard.transform);
+
                 _tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
- 
-        _cam.transform.position = new Vector3((float)_width/2 -0.5f, (float)_height / 2 - 0.5f,-10);
+
+        _cam.transform.position = InitPosition((float)_width, (float)_height);
+        _gameBoard.transform.Rotate(0, 0, 45, Space.Self);
     }
- 
-    public Tile GetTileAtPosition(Vector2 pos) {
+
+    private Vector3 InitPosition(float width, float height)
+    {
+        return new Vector3(width / 2 - 0.5f, height / 2 - 0.5f, -10);
+    }
+
+    public Tile GetTileAtPosition(Vector2 pos)
+    {
         if (_tiles.TryGetValue(pos, out var tile)) return tile;
         return null;
     }

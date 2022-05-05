@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private int _width, _height;
+    [SerializeField] private int width, height;
 
-    [SerializeField] private Tile _tilePrefab;
+    [SerializeField] private Tile tilePrefab;
 
-    [SerializeField] private Transform _cam;
+    [SerializeField] private Transform cam;
 
-    [SerializeField] private GameObject _gameBoard;
+    [SerializeField] private GameObject gameBoard;
 
-    private Dictionary<Vector2, Tile> _tiles;
+    private Dictionary<Vector2, Tile> tiles;
 
     void Start()
     {
@@ -22,26 +22,22 @@ public class GridManager : MonoBehaviour
 
     void GenerateGrid()
     {
-        _tiles = new Dictionary<Vector2, Tile>();
+        tiles = new Dictionary<Vector2, Tile>();
 
-        _gameBoard.transform.position = InitPosition((float)_width, (float)_height);
+        gameBoard.transform.position = InitPosition((float)width, (float)height);
 
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < _height; y++)
+            for (int y = 0; y < height; y++)
             {
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
+                var spawnedTile = CreateTile(x, y);
 
-                spawnedTile.Init();
-                spawnedTile.transform.SetParent(_gameBoard.transform);
-
-                _tiles[new Vector2(x, y)] = spawnedTile;
+                tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
 
-        _cam.transform.position = InitPosition((float)_width, (float)_height);
-        _gameBoard.transform.Rotate(0, 0, 45, Space.Self);
+        cam.transform.position = InitPosition((float)width, (float)height);
+        gameBoard.transform.Rotate(0, 0, 45, Space.Self);
     }
 
     private Vector3 InitPosition(float width, float height)
@@ -51,7 +47,35 @@ public class GridManager : MonoBehaviour
 
     public Tile GetTileAtPosition(Vector2 pos)
     {
-        if (_tiles.TryGetValue(pos, out var tile)) return tile;
+        if (tiles.TryGetValue(pos, out var tile))
+        {
+            Debug.Log(tile.name);
+            return tile;
+        }
         return null;
     }
+
+    private Tile CreateTile(int x, int y)
+    {
+        var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
+        spawnedTile.Position = new Vector2(x, y);
+        spawnedTile.name = $"Tile {x} {y}";
+
+        spawnedTile.Init();
+        spawnedTile.transform.SetParent(gameBoard.transform);
+
+        return spawnedTile;
+    }
+
+    public Tile GetTile(Vector2 pos)
+    {
+        if (tiles.TryGetValue(pos, out var tile))
+        {
+            Debug.Log(tile.name);
+            return tile;
+        }
+
+        return null;
+    }
+
 }

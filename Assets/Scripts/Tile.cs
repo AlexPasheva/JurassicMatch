@@ -1,48 +1,117 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _renderer;
-    [SerializeField] private GameObject _highlight;
-    [SerializeField] private GameObject _dinosaurTile;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject highlight;
+    [SerializeField] private GameObject dinosaurTile;
 
-    [SerializeField] private Dinosaur _dinosaurType;
+    [SerializeField] private Dinosaur dinosaurType;
 
-    [SerializeField] private Sprite[] _dinoArray;
+    [SerializeField] private Sprite[] dinoArray;
 
+    private bool isSelected;
+    private Vector2 position;
 
-    enum Dinosaur {
+    public bool IsSelected
+    {
+        get { return isSelected; }
+        set
+        {
+            isSelected = value;
+
+            if (!value)
+            {
+                DisableHighlight();
+            }
+            else
+            {
+                EnableHighlight();
+            }
+        }
+    }
+
+    public Vector2 Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
+    public static event Action<Tile> tileClicked;
+
+    public enum Dinosaur
+    {
+        Brachiosaurus,
         Stegosaurus,
-        Velociraptor
+        Trex,
+        Triceratops
+    }
+
+    public Dinosaur DinosaurType
+    {
+        get { return dinosaurType; }
     }
 
     public void Init()
     {
-        _renderer.flipX = getRandomBoolean();
-        _renderer.flipY = getRandomBoolean();
-        _dinosaurTile.GetComponent<SpriteRenderer>().sprite = _dinoArray[Random.Range(0,_dinoArray.Length)];
+        InitTile();
+        InitDinosaur();
+    }
 
+    private void InitTile()
+    {
+        spriteRenderer.flipX = getRandomBoolean();
+        spriteRenderer.flipY = getRandomBoolean();
+
+        highlight.GetComponent<SpriteRenderer>().sortingLayerName = "Dinosaur";
+    }
+    private void InitDinosaur()
+    {
+        Dinosaur randomDinosaur = getRandomDinosaurType();
+        dinosaurTile.GetComponent<SpriteRenderer>().sprite = dinoArray[(int)randomDinosaur];
+        dinosaurType = randomDinosaur;
     }
 
     private Dinosaur getRandomDinosaurType()
     {
-        return (Dinosaur)Random.Range(0, System.Enum.GetValues(typeof(Dinosaur)).Length);
+        return (Dinosaur)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(Dinosaur)).Length);
     }
 
     private bool getRandomBoolean()
     {
-        return Random.value > 0.5f;
+        return UnityEngine.Random.value > 0.5f;
+    }
+
+    private void EnableHighlight()
+    {
+        highlight.SetActive(true);
+    }
+
+    private void DisableHighlight()
+    {
+        if (!isSelected)
+        {
+            highlight.SetActive(false);
+        }
     }
 
     void OnMouseEnter()
     {
-        _highlight.SetActive(true);
+        EnableHighlight();
+        tileClicked.Invoke(this);
     }
 
     void OnMouseExit()
     {
-        _highlight.SetActive(false);
+        DisableHighlight();
     }
+
+    void OnMouseDown()
+    {
+        tileClicked?.Invoke(this);
+    }
+
 }

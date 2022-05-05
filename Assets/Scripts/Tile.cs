@@ -13,17 +13,29 @@ public class Tile : MonoBehaviour
     [SerializeField] private Sprite[] _dinoArray;
 
 
-    enum Dinosaur {
-        Stegosaurus,
-        Velociraptor
+    enum Dinosaur
+    {
+        Dinosaur,
+        Brachiosaurus,
+        Stegosaurus
     }
 
     public void Init()
     {
+        InitTile();
+        InitDinosaur();
+    }
+
+    private void InitTile()
+    {
         _renderer.flipX = getRandomBoolean();
         _renderer.flipY = getRandomBoolean();
-        _dinosaurTile.GetComponent<SpriteRenderer>().sprite = _dinoArray[Random.Range(0,_dinoArray.Length)];
-
+    }
+    private void InitDinosaur()
+    {
+        Dinosaur randomDinosaur = getRandomDinosaurType();
+        _dinosaurTile.GetComponent<SpriteRenderer>().sprite = _dinoArray[(int)randomDinosaur];
+        _dinosaurType = randomDinosaur;
     }
 
     private Dinosaur getRandomDinosaurType()

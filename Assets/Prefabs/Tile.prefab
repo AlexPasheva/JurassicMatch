@@ -184,14 +184,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5f62c4ad0804618af85b9db964617e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 3822656365541146518}
-  _highlight: {fileID: 2515118217928368336}
-  _dinosaurTile: {fileID: 4854172754980996324}
-  _dinosaurType: 0
-  _dinoArray:
-  - {fileID: 21300000, guid: 0465bc264bb8e4e40a7460284b9890d5, type: 3}
+  renderer: {fileID: 3822656365541146518}
+  highlight: {fileID: 2515118217928368336}
+  dinosaurTile: {fileID: 4854172754980996324}
+  dinosaurType: 0
+  dinoArray:
   - {fileID: 21300000, guid: d2698e7a5768a45ccad5664c4c359228, type: 3}
   - {fileID: 21300000, guid: f620d617284f044cb8da660eceef4bf3, type: 3}
+  - {fileID: 21300000, guid: 132563ea63060484a8399380c4071872, type: 3}
+  - {fileID: 21300000, guid: 97ae6ea079057a04c86851136e676b72, type: 3}
 --- !u!61 &1031105762609222553
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -289,7 +290,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -416223551
-  m_SortingLayer: 0
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

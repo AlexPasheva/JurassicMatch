@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _renderer;
-    [SerializeField] private GameObject _highlight;
-    [SerializeField] private GameObject _dinosaurTile;
+    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private GameObject highlight;
+    [SerializeField] private GameObject dinosaurTile;
 
-    [SerializeField] private Dinosaur _dinosaurType;
+    [SerializeField] private Dinosaur dinosaurType;
 
-    [SerializeField] private Sprite[] _dinoArray;
+    [SerializeField] private Sprite[] dinoArray;
 
 
     enum Dinosaur
     {
-        Dinosaur,
         Brachiosaurus,
-        Stegosaurus
+        Stegosaurus,
+        Trex,
+        Triceratops
     }
 
     public void Init()
@@ -28,14 +29,14 @@ public class Tile : MonoBehaviour
 
     private void InitTile()
     {
-        _renderer.flipX = getRandomBoolean();
-        _renderer.flipY = getRandomBoolean();
+        renderer.flipX = getRandomBoolean();
+        renderer.flipY = getRandomBoolean();
     }
     private void InitDinosaur()
     {
         Dinosaur randomDinosaur = getRandomDinosaurType();
-        _dinosaurTile.GetComponent<SpriteRenderer>().sprite = _dinoArray[(int)randomDinosaur];
-        _dinosaurType = randomDinosaur;
+        dinosaurTile.GetComponent<SpriteRenderer>().sprite = dinoArray[(int)randomDinosaur];
+        dinosaurType = randomDinosaur;
     }
 
     private Dinosaur getRandomDinosaurType()
@@ -50,11 +51,11 @@ public class Tile : MonoBehaviour
 
     void OnMouseEnter()
     {
-        _highlight.SetActive(true);
+        highlight.SetActive(true);
     }
 
     void OnMouseExit()
     {
-        _highlight.SetActive(false);
+        highlight.SetActive(false);
     }
 }

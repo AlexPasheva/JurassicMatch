@@ -303,11 +303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66450b8d8d7964ecfb153a934e15bfb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 10
-  _height: 10
-  _tilePrefab: {fileID: 1633257958826751662, guid: a31a22f2c98fa4fb4b2bf39b10839b7e, type: 3}
-  _cam: {fileID: 519420032}
-  _gameBoard: {fileID: 1374044288}
+  width: 10
+  height: 10
+  tilePrefab: {fileID: 1633257958826751662, guid: a31a22f2c98fa4fb4b2bf39b10839b7e, type: 3}
+  cam: {fileID: 519420032}
+  gameBoard: {fileID: 1374044288}
 --- !u!4 &682206129
 Transform:
   m_ObjectHideFlags: 0

@@ -30,11 +30,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = $"Tile {x} {y}";
-
-                spawnedTile.Init();
-                spawnedTile.transform.SetParent(gameBoard.transform);
+                var spawnedTile = CreateTile(x, y);
 
                 tiles[new Vector2(x, y)] = spawnedTile;
             }
@@ -51,7 +47,45 @@ public class GridManager : MonoBehaviour
 
     public Tile GetTileAtPosition(Vector2 pos)
     {
-        if (tiles.TryGetValue(pos, out var tile)) return tile;
+        if (tiles.TryGetValue(pos, out var tile))
+        {
+            Debug.Log(tile.name);
+            return tile;
+        }
         return null;
     }
+
+    private Tile CreateTile(int x, int y)
+    {
+        var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
+        spawnedTile.Position = new Vector2(x, y);
+        spawnedTile.name = $"Tile {x} {y}";
+
+        spawnedTile.Init();
+        spawnedTile.transform.SetParent(gameBoard.transform);
+
+        return spawnedTile;
+    }
+
+    public Tile GetTile(Vector2 pos)
+    {
+        if (tiles.TryGetValue(pos, out var tile))
+        {
+            Debug.Log(tile.name);
+            return tile;
+        }
+
+        return null;
+    }
+
+    // private void OnEnable()
+    // {
+    //     Tile.tileClicked += GetTile;
+    // }
+
+    // private void OnDisable()
+    // {
+    //     Tile.tileClicked -= GetTile;
+    // }
+
 }

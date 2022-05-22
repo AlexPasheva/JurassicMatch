@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject highlight;
     [SerializeField] private GameObject dinosaurTile;
 
@@ -12,13 +13,27 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private Sprite[] dinoArray;
 
+    private Vector2 position;
 
-    enum Dinosaur
+    public Vector2 Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
+    public static event Action<Tile> tileClicked;
+
+    public enum Dinosaur
     {
         Brachiosaurus,
         Stegosaurus,
         Trex,
         Triceratops
+    }
+
+    public Dinosaur DinosaurType
+    {
+        get { return dinosaurType; }
     }
 
     public void Init()
@@ -29,8 +44,8 @@ public class Tile : MonoBehaviour
 
     private void InitTile()
     {
-        renderer.flipX = getRandomBoolean();
-        renderer.flipY = getRandomBoolean();
+        spriteRenderer.flipX = getRandomBoolean();
+        spriteRenderer.flipY = getRandomBoolean();
     }
     private void InitDinosaur()
     {
@@ -41,12 +56,12 @@ public class Tile : MonoBehaviour
 
     private Dinosaur getRandomDinosaurType()
     {
-        return (Dinosaur)Random.Range(0, System.Enum.GetValues(typeof(Dinosaur)).Length);
+        return (Dinosaur)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(Dinosaur)).Length);
     }
 
     private bool getRandomBoolean()
     {
-        return Random.value > 0.5f;
+        return UnityEngine.Random.value > 0.5f;
     }
 
     void OnMouseEnter()
@@ -57,5 +72,10 @@ public class Tile : MonoBehaviour
     void OnMouseExit()
     {
         highlight.SetActive(false);
+    }
+
+    void OnMouseDown()
+    {
+        tileClicked?.Invoke(this);
     }
 }

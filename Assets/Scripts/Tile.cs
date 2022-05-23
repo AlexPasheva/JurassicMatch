@@ -27,6 +27,10 @@ public class Tile : MonoBehaviour
             {
                 DisableHighlight();
             }
+            else
+            {
+                EnableHighlight();
+            }
         }
     }
 

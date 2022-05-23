@@ -13,7 +13,22 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private Sprite[] dinoArray;
 
+    private bool isSelected;
     private Vector2 position;
+
+    public bool IsSelected
+    {
+        get { return isSelected; }
+        set
+        {
+            isSelected = value;
+
+            if (value == false)
+            {
+                DisableHighlight();
+            }
+        }
+    }
 
     public Vector2 Position
     {
@@ -46,6 +61,8 @@ public class Tile : MonoBehaviour
     {
         spriteRenderer.flipX = getRandomBoolean();
         spriteRenderer.flipY = getRandomBoolean();
+
+        highlight.GetComponent<SpriteRenderer>().sortingLayerName = "Dinosaur";
     }
     private void InitDinosaur()
     {
@@ -64,18 +81,32 @@ public class Tile : MonoBehaviour
         return UnityEngine.Random.value > 0.5f;
     }
 
-    void OnMouseEnter()
+    private void EnableHighlight()
     {
         highlight.SetActive(true);
     }
 
+    private void DisableHighlight()
+    {
+        if (!isSelected)
+        {
+            highlight.SetActive(false);
+        }
+    }
+
+    void OnMouseEnter()
+    {
+        EnableHighlight();
+    }
+
     void OnMouseExit()
     {
-        highlight.SetActive(false);
+        DisableHighlight();
     }
 
     void OnMouseDown()
     {
         tileClicked?.Invoke(this);
     }
+
 }

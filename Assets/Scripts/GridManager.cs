@@ -78,14 +78,4 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    // private void OnEnable()
-    // {
-    //     Tile.tileClicked += GetTile;
-    // }
-
-    // private void OnDisable()
-    // {
-    //     Tile.tileClicked -= GetTile;
-    // }
-
 }

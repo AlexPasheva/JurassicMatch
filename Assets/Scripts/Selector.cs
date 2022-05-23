@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Selector : MonoBehaviour
 {
-    [SerializeField] private Queue<Tile> selectedElements;
+    private Queue<Tile> selectedElements;
     [SerializeField] private List<Tile> selectedElementsList;
 
     [SerializeField] private Tile previousTile;
@@ -24,10 +25,16 @@ public class Selector : MonoBehaviour
     {
         if ((selectedElements.Count > 0) && !IsMatch(tile))
         {
+            foreach (Tile t in selectedElements)
+            {
+                t.IsSelected = false;
+            }
+
             selectedElements = new Queue<Tile>();
         }
 
         selectedElements.Enqueue(tile);
+        tile.IsSelected = true;
         previousTile = tile;
     }
 

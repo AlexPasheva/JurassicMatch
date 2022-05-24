@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour
         {
             isSelected = value;
 
-            if (value == false)
+            if (!value)
             {
                 DisableHighlight();
             }
@@ -101,6 +101,7 @@ public class Tile : MonoBehaviour
     void OnMouseEnter()
     {
         EnableHighlight();
+        tileClicked.Invoke(this);
     }
 
     void OnMouseExit()

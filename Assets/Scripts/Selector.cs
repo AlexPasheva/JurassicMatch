@@ -48,9 +48,13 @@ public class Selector : MonoBehaviour
 
     private bool IsMatch(Tile tile)
     {
+<<<<<<< HEAD
         return (tile.DinosaurType == previousTile.DinosaurType &&
                                      IsAdjecent(tile, previousTile) &&
                                      !selectedElements.Contains(tile));
+=======
+        return (tile.DinosaurType == previousTile.DinosaurType && IsAdjecent(tile, previousTile) && !selectedElements.Contains(tile));
+>>>>>>> a70926baefc1b0e800eb1baa26961e13be959719
     }
 
     private void OnEnable()

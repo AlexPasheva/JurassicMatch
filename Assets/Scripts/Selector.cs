@@ -33,10 +33,10 @@ public class Selector : MonoBehaviour
                 foreach (Tile t in selectedElements)
                 {
                     Debug.Log($"Destroyed tile {t.name}");
-                    t.transform.position = new Vector2(42, 42);
-
-                    moveTiles?.Invoke(selectedElements);
+                    //t.transform.position = new Vector2(0, 0);
                 }
+
+                moveTiles?.Invoke(selectedElements);
             }
 
             foreach (Tile t in selectedElements)

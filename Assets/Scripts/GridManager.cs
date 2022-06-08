@@ -9,12 +9,25 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Tile tilePrefab;
 
+    [SerializeField] private GameObject pointPrefab;
+
     [SerializeField] private Transform cam;
 
     [SerializeField] private GameObject gameBoard;
 
     private Dictionary<Vector2, Tile> tiles;
 
+    private Dictionary<Vector2, GameObject> points;
+
+    public int Width
+    {
+        get { return width; }
+    }
+
+    public int Height
+    {
+        get { return height; }
+    }
 
     void Start()
     {
@@ -24,8 +37,10 @@ public class GridManager : MonoBehaviour
     void GenerateGrid()
     {
         tiles = new Dictionary<Vector2, Tile>();
+        points = new Dictionary<Vector2, GameObject>();
 
         gameBoard.transform.position = InitPosition((float)width, (float)height);
+
 
         for (int x = 0; x < width; x++)
         {
@@ -33,7 +48,16 @@ public class GridManager : MonoBehaviour
             {
                 var spawnedTile = CreateTile(x, y);
 
+
                 tiles[new Vector2(x, y)] = spawnedTile;
+            }
+        }
+
+        for (int x = -width * width; x < width * width + 2; x++)
+        {
+            for (int y = -height * height; y < height * height + 2; y++)
+            {
+                points[new Vector2(x, y)] = CreatePoint(x, y);
             }
         }
 
@@ -46,14 +70,14 @@ public class GridManager : MonoBehaviour
         return new Vector3(width / 2 - 0.5f, height / 2 - 0.5f, -10);
     }
 
-    public Tile GetTileAtPosition(Vector2 pos)
+    private GameObject CreatePoint(int x, int y)
     {
-        if (tiles.TryGetValue(pos, out var tile))
-        {
-            Debug.Log(tile.name);
-            return tile;
-        }
-        return null;
+        var spawnedPoint = Instantiate(pointPrefab, new Vector3(x, y), Quaternion.identity);
+        spawnedPoint.name = $"Point {x} {y}";
+
+        spawnedPoint.transform.SetParent(gameBoard.transform);
+
+        return spawnedPoint;
     }
 
     private Tile CreateTile(int x, int y)
@@ -74,6 +98,16 @@ public class GridManager : MonoBehaviour
         {
             Debug.Log(tile.name);
             return tile;
+        }
+
+        return null;
+    }
+
+    public GameObject GetPoint(Vector2 pos)
+    {
+        if (points.TryGetValue(pos, out var point))
+        {
+            return point;
         }
 
         return null;

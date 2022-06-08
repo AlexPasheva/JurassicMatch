@@ -298,6 +298,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedElementsList: []
   previousTile: {fileID: 0}
+--- !u!114 &682206131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1743523549566373485, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
+  m_PrefabInstance: {fileID: 1743523550243270109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682206127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66450b8d8d7964ecfb153a934e15bfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &682206132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682206127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0a5c167767a234a8718f88eb2ad0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 682206131}
+  tilesToMove: []
+  trajectory: []
 --- !u!1 &1374044288
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,9 +481,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420032}
     - target: {fileID: 1743523549566373485, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
+      propertyPath: width
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743523549566373485, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743523549566373485, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
       propertyPath: gameBoard
       value: 
       objectReference: {fileID: 1374044288}
+    - target: {fileID: 1743523549566373485, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
+      propertyPath: pointPrefab
+      value: 
+      objectReference: {fileID: 8606084832462670904, guid: 752f8263706000247bf8c9d45611a8e7, type: 3}
     - target: {fileID: 1743523549566373490, guid: bf596808def17cd41be30c6bca6ceb27, type: 3}
       propertyPath: m_Name
       value: GridManager

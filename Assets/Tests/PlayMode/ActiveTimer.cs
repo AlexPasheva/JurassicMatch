@@ -5,22 +5,26 @@ using UnityEngine;
 using UnityEngine.TestTools;
 public class TimerTest
 {
-
+    /*
     [UnityTest]
     public IEnumerator Active()
     {
-        var tim = new Timer();
+        Timer tim = new Timer();
 
         tim.Initialise( 15 );
 
         tim.Activate();
 
+
         float currentTime = tim.CurrentTime;
 
         yield return new WaitForSeconds(3);
 
+
+        Debug.Log("Curren time is: '" + currentTime + "' and the time comparitor is: '" + tim.CurrentTime + "'.");
         Assert.AreNotEqual(currentTime, tim.CurrentTime);
     }
+    */
     /*
     [UnityTest]
     public IEnumerator Paused()

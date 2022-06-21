@@ -91,9 +91,13 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void Increase()
+    public void Increase(int timerIncreaseSeconds)
     {
-        currentTime += increasedTimerSeconds;
+        currentTime += timerIncreaseSeconds;
+        if (currentTime > startSeconds)
+        {
+            currentTime = startSeconds;
+        }
     }
 
     public void Activate()

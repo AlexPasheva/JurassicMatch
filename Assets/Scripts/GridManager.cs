@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -9,15 +10,23 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Tile _tilePrefab;
 
+    [SerializeField] private Slider _sliderPrefab;
+
     [SerializeField] private Transform _cam;
 
     [SerializeField] private GameObject _gameBoard;
 
+
     private Dictionary<Vector2, Tile> _tiles;
+
+
 
     void Start()
     {
         GenerateGrid();
+        var temp = Instantiate(_sliderPrefab, InitPosition((float)_width, (float)_height), Quaternion.identity);
+        temp.name = "Slider";
+        //_sliderPrefab.transform.position = InitPosition((float)_width, (float)_height);
     }
 
     void GenerateGrid()

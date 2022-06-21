@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseTimeout: 5
-  startSeconds: 10
+  startSeconds: 50
   increasedTimerSeconds: 10
   timerSlider: {fileID: 1051132329}
   currentTimeText: {fileID: 1041599880}
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 1041599881}
   - component: {fileID: 1041599880}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -774,7 +774,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051132327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7104687, w: 0.70372885}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -784,11 +784,11 @@ RectTransform:
   - {fileID: 1041599882}
   m_Father: {fileID: 269034463}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.546}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.2, y: 214.6}
-  m_SizeDelta: {x: 275.5883, y: 55.1038}
+  m_AnchoredPosition: {x: 55.7, y: 83.9}
+  m_SizeDelta: {x: 302.1982, y: 74.7951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1051132329
 MonoBehaviour:
@@ -829,7 +829,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1026168031}
   m_HandleRect: {fileID: 0}
@@ -1100,8 +1100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.047302246, y: 0.39190006}
-  m_SizeDelta: {x: -1.8404, y: -0.7839}
+  m_AnchoredPosition: {x: 0.4364624, y: -0.000038146973}
+  m_SizeDelta: {x: -0.87286, y: -0.000024796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1603539381
 GameObject:
@@ -1566,13 +1566,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 269034459}
-        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_TargetAssemblyTypeName: Timer, Scripts
         m_MethodName: Increase
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

@@ -107,6 +107,14 @@ public class Tile : MonoBehaviour
     void OnMouseExit()
     {
         DisableHighlight();
+<<<<<<< HEAD
+=======
+    }
+
+    void OnMouseDown()
+    {
+        tileClicked?.Invoke(this);
+>>>>>>> 946a807715e6aefb361f9c00c46235c143d3d750
     }
 
     void OnMouseDown()

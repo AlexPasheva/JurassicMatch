@@ -84,7 +84,6 @@ public class GridManager : MonoBehaviour
     {
         var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
         spawnedTile.Position = new Vector2(x, y);
-        spawnedTile.name = $"Tile {x} {y}";
 
         spawnedTile.Init();
         spawnedTile.transform.SetParent(gameBoard.transform);
@@ -96,7 +95,6 @@ public class GridManager : MonoBehaviour
     {
         if (tiles.TryGetValue(pos, out var tile))
         {
-            Debug.Log(tile.name);
             return tile;
         }
 
@@ -113,4 +111,15 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    public List<Vector2> GetPoints(List<Tile> tiles)
+    {
+        List<Vector2> result = new List<Vector2>();
+
+        foreach (Tile t in tiles)
+        {
+            result.Add(new Vector2(t.Position.x, t.Position.y));
+        }
+
+        return result;
+    }
 }

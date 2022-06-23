@@ -37,7 +37,11 @@ public class Tile : MonoBehaviour
     public Vector2 Position
     {
         get { return position; }
-        set { position = value; }
+        set
+        {
+            position = value;
+            this.name = $"Tile {position.x} {position.y}";
+        }
     }
 
     public static event Action<Tile> tileClicked;
@@ -111,6 +115,7 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
+        Debug.Log(this.name);
         tileClicked?.Invoke(this);
     }
 }

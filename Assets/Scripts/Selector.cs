@@ -29,13 +29,6 @@ public class Selector : MonoBehaviour
         {
             if (IsMatch(tile))
             {
-                Debug.Log("Bam");
-                foreach (Tile t in selectedElements)
-                {
-                    Debug.Log($"Destroyed tile {t.name}");
-                    //t.transform.position = new Vector2(0, 0);
-                }
-
                 moveTiles?.Invoke(selectedElements);
             }
 

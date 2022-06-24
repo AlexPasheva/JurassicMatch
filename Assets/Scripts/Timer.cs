@@ -17,7 +17,9 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private int pauseTimeout;
     [SerializeField] private int startSeconds;
+    [SerializeField] private int increasedTimerSeconds;
 
+    [SerializeField] private Slider timerSlider;
     [SerializeField] private Text currentTimeText;
 
     private float currentTime;
@@ -26,6 +28,14 @@ public class Timer : MonoBehaviour
     void Start()
     {
         currentTime = startSeconds;
+        timerSlider.maxValue = startSeconds;
+        timerSlider.value = startSeconds;
+    }
+
+    public void Initialise(int startingTime)
+    {
+        currentTime = startingTime;
+        currentState = State.INITIALIZED;
     }
 
     void Update()
@@ -55,6 +65,8 @@ public class Timer : MonoBehaviour
     private void ActiveStateHandler()
     {
         currentTime -= Time.deltaTime;
+        
+        timerSlider.value = currentTime;
 
         if (currentTime <= 0f)
         {
@@ -76,6 +88,15 @@ public class Timer : MonoBehaviour
         if (currentState == State.ACTIVE)
         {
             currentState = State.STOPPED;
+        }
+    }
+
+    public void Increase(int timerIncreaseSeconds)
+    {
+        currentTime += timerIncreaseSeconds;
+        if (currentTime > startSeconds)
+        {
+            currentTime = startSeconds;
         }
     }
 
@@ -111,6 +132,12 @@ public class Timer : MonoBehaviour
         {
             currentTimeText.text = $"{time.Minutes.ToString()}:{time.Seconds.ToString()}";
         }
+    }
+
+    
+    public float CurrentTime
+    {
+        get { return currentTime; }
     }
 
 }

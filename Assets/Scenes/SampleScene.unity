@@ -306,6 +306,7 @@ MonoBehaviour:
   _width: 10
   _height: 10
   _tilePrefab: {fileID: 1633257958826751662, guid: a31a22f2c98fa4fb4b2bf39b10839b7e, type: 3}
+  _sliderPrefab: {fileID: 136087355580546816, guid: 679df17db3e5bbc4ea3e98b2a5774523, type: 3}
   _cam: {fileID: 519420032}
   _gameBoard: {fileID: 1374044288}
 --- !u!4 &682206129

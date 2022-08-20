@@ -13,12 +13,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private Sprite[] _dinoArray;
 
 
-    enum Dinosaur
-    {
-        Dinosaur,
-        Brachiosaurus,
-        Stegosaurus
-    }
+    
 
     public void Init()
     {

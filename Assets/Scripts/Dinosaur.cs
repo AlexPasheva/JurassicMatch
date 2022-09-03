@@ -1,6 +1,7 @@
 public enum Dinosaur
 {
-    Dinosaur,
     Brachiosaurus,
-    Stegosaurus
+    Stegosaurus,
+    Trex,
+    Triceratops
 }

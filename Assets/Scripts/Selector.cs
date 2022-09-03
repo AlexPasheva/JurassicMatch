@@ -12,6 +12,7 @@ public class Selector : MonoBehaviour
 
     public static event Action<Queue<Tile>> moveTiles;
     public static event Action<Dinosaur, int> deductDinosaurs;
+    public static event Action<float> incrementTime;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class Selector : MonoBehaviour
             if (IsMatch(tile))
             {
                 deductDinosaurs?.Invoke(selectedElements.Peek().DinosaurType, selectedElements.Count);
+                incrementTime?.Invoke((float)selectedElements.Count);
                 moveTiles?.Invoke(selectedElements);
             }
 

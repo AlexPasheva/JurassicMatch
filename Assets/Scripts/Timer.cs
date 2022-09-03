@@ -13,6 +13,9 @@ public class Timer : MonoBehaviour
         STOPPED,
         PAUSED
     }
+
+    public Slider timerSlider;
+
     private State currentState = State.INITIALIZED;
 
     [SerializeField] private int pauseTimeout;
@@ -25,7 +28,10 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
+        timerSlider.maxValue = startSeconds;
         currentTime = startSeconds;
+        timerSlider.value = currentTime;
+        Activate();
     }
 
     void Update()
@@ -49,8 +55,7 @@ public class Timer : MonoBehaviour
 
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
 
-        PrintTime(time);
-
+        timerSlider.value = currentTime;
     }
     private void ActiveStateHandler()
     {
@@ -71,6 +76,12 @@ public class Timer : MonoBehaviour
             timeInPausedState = 0;
         }
     }
+
+    public void Increment(float incrementTime)
+    {
+        currentTime += incrementTime;
+    }
+
     public void Stop()
     {
         if (currentState == State.ACTIVE)
@@ -111,6 +122,16 @@ public class Timer : MonoBehaviour
         {
             currentTimeText.text = $"{time.Minutes.ToString()}:{time.Seconds.ToString()}";
         }
+    }
+
+    private void OnEnable()
+    {
+        Selector.incrementTime += Increment;
+    }
+
+    private void OnDisable()
+    {
+        Selector.incrementTime -= Increment;
     }
 
 }

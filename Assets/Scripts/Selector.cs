@@ -6,6 +6,7 @@ using UnityEngine;
 public class Selector : MonoBehaviour
 {
     private Queue<Tile> selectedElements;
+    [SerializeField] private ParticleSystem tileDestroyParticleSystem;
     [SerializeField] private List<Tile> selectedElementsList;
 
     [SerializeField] private Tile previousTile;
@@ -33,6 +34,12 @@ public class Selector : MonoBehaviour
             {
                 deductDinosaurs?.Invoke(selectedElements.Peek().DinosaurType, selectedElements.Count);
                 incrementTime?.Invoke((float)selectedElements.Count);
+
+                foreach (Tile t in selectedElements)
+                {
+                    Instantiate(tileDestroyParticleSystem, t.transform.position, t.transform.rotation);
+                }
+
                 moveTiles?.Invoke(selectedElements);
             }
 

@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
         PAUSED
     }
 
+    public static event Action gameOver;
     public Slider timerSlider;
 
     private State currentState = State.INITIALIZED;
@@ -56,6 +57,11 @@ public class Timer : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
 
         timerSlider.value = currentTime;
+
+        if (currentTime < 0)
+        {
+            gameOver?.Invoke();
+        }
     }
     private void ActiveStateHandler()
     {

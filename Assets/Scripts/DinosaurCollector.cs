@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using TMPro;
 
 public class DinosaurCollector : MonoBehaviour
 {
+    public static event Action gameOver;
     enum State
     {
         COLLECTING,
@@ -25,10 +27,10 @@ public class DinosaurCollector : MonoBehaviour
     {
         var slots = GameObject.FindGameObjectsWithTag("Slot");
         dinosaurList = new Dictionary<Dinosaur, int>();
-        dinosaurList[Dinosaur.Brachiosaurus] = 30;
-        dinosaurList[Dinosaur.Stegosaurus] = 50;
-        dinosaurList[Dinosaur.Trex] = 40;
-        dinosaurList[Dinosaur.Triceratops] = 20;
+        dinosaurList[Dinosaur.Brachiosaurus] = 40;
+        dinosaurList[Dinosaur.Stegosaurus] = 30;
+        dinosaurList[Dinosaur.Trex] = 20;
+        dinosaurList[Dinosaur.Triceratops] = 10;
         DisplayItems();
     }
 
@@ -54,6 +56,7 @@ public class DinosaurCollector : MonoBehaviour
         if (AimIsReached())
         {
             currentState = State.EVERYTHING_COLLECTED;
+            gameOver?.Invoke();
         }
 
         DisplayItems();

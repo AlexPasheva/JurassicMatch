@@ -488,7 +488,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -897,6 +897,7 @@ GameObject:
   - component: {fileID: 682206128}
   - component: {fileID: 682206130}
   - component: {fileID: 682206131}
+  - component: {fileID: 682206132}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -949,6 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a20302119ff247b0b2b53b066eefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileDestroyParticleSystem: {fileID: 2441081082371976611, guid: 37ba3dc3dce655e45bec104ed642b855, type: 3}
   selectedElementsList: []
   previousTile: {fileID: 0}
 --- !u!114 &682206131
@@ -966,6 +968,18 @@ MonoBehaviour:
   gridManager: {fileID: 682206128}
   tilesToMove: []
   trajectory: []
+--- !u!114 &682206132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682206127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a36b2200c31647b009deda35d83d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &744335280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4820991317489828875, guid: 0432089f4a84016429ceca3073565b81, type: 3}
@@ -1925,7 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.764151, g: 0.46052155, b: 0.14129588, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2145,10 +2159,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.28328627, g: 0.8113208, b: 0.11940199, a: 1}
+    m_HighlightedColor: {r: 0.13022429, g: 0.20550545, b: 0.5849056, a: 1}
+    m_PressedColor: {r: 0.30309722, g: 0.312778, b: 0.6226415, a: 1}
+    m_SelectedColor: {r: 0.03389107, g: 0.26415092, b: 0.09979441, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2189,7 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerSlider: {fileID: 1741471817}
   pauseTimeout: 5
-  startSeconds: 100
+  startSeconds: 30
   currentTimeText: {fileID: 0}
 --- !u!1 &1749410519
 GameObject:

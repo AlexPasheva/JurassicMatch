@@ -12,7 +12,6 @@ public class TileMovement : MonoBehaviour
 
     private Dictionary<Vector2, Direction> directions;
 
-    // private Dictionary<Tile, List<Vector2>> paths;
     [SerializeField] private Dictionary<Tile, Queue<Vector2>> paths;
 
     private int destroyedTilesCount;
@@ -46,16 +45,15 @@ public class TileMovement : MonoBehaviour
 
     private void MoveTilesToDesignatedPoint()
     {
-        // for (int i = 0; i < tilesToMove.Count; i++)
-        // {
-        //     tilesToMove[i].transform.position = Vector2.MoveTowards(tilesToMove[i].transform.position, gridManager.GetPoint(paths[tilesToMove[i]][j[tilesToMove[i]]]).transform.position, Time.deltaTime * 1f);
-        //     tilesToMove[i].Position = paths[tilesToMove[i]][j[tilesToMove[i]]];
-        // }
         if (paths.Count != 0 && paths.Values.Last().Count != 0) // dali posledniq tile w opashkata ima oshte put da hodi
         {
             foreach (Tile t in tilesToMove)
             {
-                Vector2 targetPoint = paths[t].Peek();
+                Vector2 targetPoint = new Vector2();
+                if (paths.Count > 0)
+                {
+                    targetPoint = paths[t].Peek();
+                }
                 t.transform.position = Vector2.MoveTowards(t.transform.position, gridManager.GetPoint(targetPoint).transform.position, Time.deltaTime * 5f);
 
                 if (Vector2.Distance(t.transform.position, gridManager.GetPoint(targetPoint).transform.position) < .00001f)
@@ -69,6 +67,7 @@ public class TileMovement : MonoBehaviour
         {
             paths.Clear();
             tilesToMove.Clear();
+            j.Clear();
         }
     }
 
@@ -77,27 +76,6 @@ public class TileMovement : MonoBehaviour
 
         if (paths.Count != 0)
             MoveTilesToDesignatedPoint();
-
-        // if (paths.Count != 0)
-        // {
-        //     MoveTilesWithOneStep();
-
-        //     for (int i = 0; i < tilesToMove.Count; i++)
-        //     {
-        //         if (Vector2.Distance(tilesToMove[i].transform.position, gridManager.GetPoint(paths[tilesToMove[i]][j[tilesToMove[i]]]).transform.position) < .001f)
-        //         {
-        //             j[tilesToMove[i]]++;
-        //             if (j[tilesToMove[i]] >= destroyedTilesCount)
-        //             {
-        //                 j[tilesToMove[i]] = 0;
-        //                 j.Clear();
-        //                 destroyedTilesCount = 0;
-        //                 tilesToMove.Clear();
-        //                 paths.Clear();
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     private void MoveTiles(Queue<Tile> _tilesToMove)
@@ -118,13 +96,6 @@ public class TileMovement : MonoBehaviour
         List<Vector2> tilesToMovePositions = gridManager.GetPoints(tilesToMove);
 
         paths = SetToEveryTileMovementPath(destroyedTilesPositions.Concat(tilesToMovePositions).ToList());
-
-        //j.Clear();
-
-        //for (int i = 0; i < tilesToMove.Count; i++)
-        //{
-        //    j[tilesToMove[i]] = 0;
-        //}
     }
 
     private void LineUpTiles(Tile currentTile, Direction generationDirection, Queue<Tile> _tilesToMove)
@@ -190,7 +161,7 @@ public class TileMovement : MonoBehaviour
             Vector2 nextTilePosition = new Vector2(currentTile.Position.x - 1, currentTile.Position.y);
             currentTile = gridManager.GetTile(nextTilePosition);
 
-            if (!currentTile.IsSelected)
+            if (currentTile != null && !currentTile.IsSelected)
             {
                 leftOverTiles.Add(currentTile);
             }

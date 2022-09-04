@@ -6,6 +6,18 @@ using System;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     enum State
     {
         INITIALIZED,
@@ -58,11 +70,17 @@ public class Timer : MonoBehaviour
 
         timerSlider.value = currentTime;
 
-        if (currentTime < 0)
+        if (HasRunOut())
         {
             gameOver?.Invoke();
         }
     }
+
+    public bool HasRunOut()
+    {
+        return currentTime <= 0;
+    }
+
     private void ActiveStateHandler()
     {
         currentTime -= Time.deltaTime;

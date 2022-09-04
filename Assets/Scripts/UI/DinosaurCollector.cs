@@ -7,6 +7,18 @@ using TMPro;
 
 public class DinosaurCollector : MonoBehaviour
 {
+    public static DinosaurCollector Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     public static event Action gameOver;
     enum State
     {
